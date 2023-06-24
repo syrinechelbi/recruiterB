@@ -1,9 +1,14 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
+// const auth = require('../middlewares/auth');
+const { createOneCandidat, updateOneCandidat, deleteOneCandidat, findAllCandidats } = require('../controller/candidat');
+const { routeAction } = require('../utils/common');
+const { candidateValidator } = require('../utils/validators');
 
-//une route pour récupérer tous les candidats
-router.get("/candidates/get",(req,res)=> {
-    res.send("hello");
-});
 
-module.exports= router;
+router.post('/create', routeAction(createOneCandidat, [],candidateValidator));
+router.put('/update/:id', routeAction(updateOneCandidat,[]));
+router.delete('/delete/:id', routeAction(deleteOneCandidat,[]));
+router.get('/all', routeAction(findAllCandidats,[]));
+
+module.exports = router;
