@@ -15,6 +15,7 @@ const candidatSchema = new mongoose.Schema(
 );
 
 const Candidate = mongoose.model("candidates",candidatSchema);
+
 const createCandidate = (query) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -26,6 +27,42 @@ const createCandidate = (query) => {
     })
 }
 
+const findCandidates = (query = {}) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const candidats = await Candidate.find(query)
+                                        .sort({createdAt: -1})
+            resolve(candidats)
+        } catch (error) {
+            reject({message: error.message})
+        }
+    })
+}
+
+const deletecandidat = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const candidat = await Candidate.findByIdAndDelete(id);
+            resolve(candidat)
+        } catch (error) {
+            reject({message: error.message})
+        }
+    })
+}
+const updateCandidat = (id, data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const candidat = await Candidate.findByIdAndUpdate(id, data, {new:true});
+            resolve(candidat)
+        } catch (error) {
+            reject({message: error.message})
+        }
+    })
+}
+
 module.exports ={
-    createCandidate
+    createCandidate,
+    findCandidates,
+    deletecandidat,
+    updateCandidat
 }
