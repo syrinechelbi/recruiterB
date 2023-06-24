@@ -15,3 +15,17 @@ const candidatSchema = new mongoose.Schema(
 );
 
 const Candidate = mongoose.model("candidates",candidatSchema);
+const createCandidate = (query) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const candidat = await Candidate.create(query);
+            resolve(candidat)
+        } catch (error) {
+            reject({message: error.message})
+        }
+    })
+}
+
+module.exports ={
+    createCandidate
+}

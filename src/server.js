@@ -24,7 +24,14 @@ database.once('open', () => {
   console.log('Connected to the database.');
 });
 
+app.get('/', async (req, res) => {
+    res.send('Done');
+  });
+  
 // tous les routes 
+app.use(express.json());
+app.use('/candidates', require('./routes/candidat'));
+
 app.use("/candidates",candidatRoute);
 
 
