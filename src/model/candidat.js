@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const candidatSchema = new mongoose.Schema(
     {
         firstName : {type : String, default:null },
-        laststName : {type : String, default:null },
+        lastName : {type : String, default:null },
         phone : {type : String, default:null },
         email : {type : String, default:null },
         password : {type : String, default:null },

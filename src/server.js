@@ -20,11 +20,10 @@ app.get('/', async (req, res) => {
     res.send('Done');
   });
   
-// tous les routes 
 app.use(express.json());
-app.use('/candidates', require('./routes/candidat'));
+// tous les routes 
 
-app.use("/candidates",candidatRoute);
+app.use('/candidates', require('./routes/candidat'));  // Cadndidate route 
 
 
 //method for running the server
