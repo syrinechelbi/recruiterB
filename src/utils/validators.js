@@ -7,11 +7,28 @@ const candidateValidator = {
             lastName    :   { type: 'string' },
             phone    :   { type: 'string' },
             email    :   { type: 'string' },
-            password    :   { type: 'string' },
+            password    :   { type: 'string' , minLength: 8 },
             gender    :   { type: 'string' }
         }
     }
 }
+
+const EmployerValidator = {
+    body    :   {
+        type    :   'object',
+        required:   ['firstName','lastName','phone','email','password','gender'],
+        properties  :   {
+            name    :   { type: 'string' },
+            companyName   :   { type: 'string' },
+            phone    :   { type: 'string' },
+            email    :   { type: 'string' },
+            password    :   { type: 'string' , minLength: 8 },
+         
+    }
+}
+}
+
 module.exports = {
-    candidateValidator
+    candidateValidator,
+    EmployerValidator
 }
