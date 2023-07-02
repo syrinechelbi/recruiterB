@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 // const auth = require('../middlewares/auth');
-const { createOneApplication, updateOneApplication, deleteOneApplication, findAllApplications,findOneApplication } = require('../controller/application');
+const { createOneApplication, deleteOneApplication, findAllApplications,findOneApplication } = require('../controller/application');
 const { routeAction } = require('../utils/common');
 const { applicationValidator } = require('../utils/validators');
+const auth = require('../middlewares/auth');
 
 
 router.post('/create', routeAction(createOneApplication, [],applicationValidator));

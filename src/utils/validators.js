@@ -22,10 +22,10 @@ applicationValidator ={
 }
 
 
-const EmployerValidator = {
+const employerValidator = {
     body    :   {
         type    :   'object',
-        required:   ['firstName','lastName','phone','email','password','gender'],
+        required:   ['name','companyName','phone','email','password','gender'],
         properties  :   {
             name    :   { type: 'string' },
             companyName   :   { type: 'string' },
@@ -48,13 +48,24 @@ const offreValidator = {
             applications    :   [{ type: 'string' }]
          
     }
+ }
 }
+const signInValidator = {
+    body : {
+        type    :   'object',
+        required:   ['email', 'password'],
+        properties  :   {
+            email    :   { type: 'string' },
+            password    :   { type: 'string', minLength: 8 }
+        }
+    }
 }
 
 
 module.exports = {
     candidateValidator,
-    EmployerValidator,
+    employerValidator,
     applicationValidator,
-    offreValidator
+    offreValidator,
+    signInValidator
 }

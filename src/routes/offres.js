@@ -4,9 +4,10 @@ const router = express.Router();
 const { createOneOffre, updateOneOffre, deleteOneOffre, findAllOffres } = require('../controller/offre');
 const { routeAction } = require('../utils/common');
 const { offreValidator } = require('../utils/validators');
+const auth = require('../middlewares/auth');
 
 
-router.post('/create', routeAction(createOneOffre, []),offreValidator);
+router.post('/create', routeAction(createOneOffre, [],offreValidator));
 router.put('/update/:id', routeAction(updateOneOffre,[]));
 router.delete('/delete/:id', routeAction(deleteOneOffre,[]));
 router.get('/all', routeAction(findAllOffres,[]));

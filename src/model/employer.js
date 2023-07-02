@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const employerSchema = new mongoose.Schema(
     {
         name : {type : String , default : null},
@@ -7,11 +8,14 @@ const employerSchema = new mongoose.Schema(
         phone : {type : String , default : null},
         email : {type : String , default : null},
         password : {type : String , default : null},
+        token: { type: String },
+
     },
     {timestamps : true}
 );
 
 const Employer = mongoose.model("employers",employerSchema);
+
 
 const createEmployer = (query) => {
     return new Promise(async(resolve, reject) => {
@@ -56,9 +60,21 @@ const deleteEmployer = (id) => {
     })
 }
 
+const findOneEmployer = (query = {}) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const employer = await Employer.findOne(query);
+            resolve(employer)
+        } catch (error) {
+            reject({message: error.message})
+        }
+    })
+}
+
 module.exports={
 createEmployer,
 findEmployer,
 updateEmployer,
-deleteEmployer
+deleteEmployer,
+findOneEmployer
 }
