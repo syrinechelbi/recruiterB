@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const Schema = mongoose.Schema;
 const candidatSchema = new mongoose.Schema(
     {
         firstName : {type : String, default:null },
@@ -7,8 +7,8 @@ const candidatSchema = new mongoose.Schema(
         phone : {type : String, default:null },
         email : {type : String, default:null },
         password : {type : String, default:null },
-        gender : {type : String, default:null }
-
+        gender : {type : String, default:null },
+        applications : [{type : Schema.Types.ObjectId,ref : "applications"}] 
 
     },
     {timestamps:true}

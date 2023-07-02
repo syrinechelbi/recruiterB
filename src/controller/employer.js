@@ -6,8 +6,9 @@ const {createEmployer,
 
     const createOneemployer = async (req,res) =>{
         try {
-            let employer = createEmployer(req.body);
+            let employer = await createEmployer(req.body);
             res.status(200).send(employer);
+        
         } catch (error) {
             res.status(400).send({message: error.message})
         }
@@ -15,7 +16,7 @@ const {createEmployer,
 
     const updateOneemployer = async (req,res) =>{
         try {
-            let employer = updateEmployer(req.params.id,req.body);
+            let employer =await updateEmployer(req.params.id,req.body);
             res.status(200).send(employer);
         } catch (error) {
             res.status(400).send({message: error.message})
@@ -24,7 +25,7 @@ const {createEmployer,
 
     const deleteOneemployer = async (req,res) =>{
         try {
-            let employer = deleteEmployer(req.param.id);
+            let employer =await deleteEmployer(req.param.id);
             res.status(200).send(employer);
         } catch (error) {
             res.status(400).send({message: error.message})
@@ -33,7 +34,7 @@ const {createEmployer,
 
     const findallemployers = async (req,res) =>{
         try {
-            let employer = findEmployer(req.body);
+            let employer =await findEmployer(req.body);
             res.status(200).send(employer);
         } catch (error) {
             res.status(400).send({message: error.message})
@@ -41,8 +42,6 @@ const {createEmployer,
     }
 
           
-  const allProducts = (query = {}) => {
-}
 
 module.exports={
     createOneemployer,
