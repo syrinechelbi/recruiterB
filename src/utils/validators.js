@@ -15,8 +15,8 @@ const candidateValidator = {
 applicationValidator ={
     body    :   {
         type    :   'object',
-       // required:   ['offres','candidat'],
-        required:   ['candidat'],
+      required:   ['offres','candidat'],
+    
         
     }
 }
