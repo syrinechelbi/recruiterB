@@ -12,6 +12,15 @@ const candidateValidator = {
         }
     }
 }
+applicationValidator ={
+    body    :   {
+        type    :   'object',
+       // required:   ['offres','candidat'],
+        required:   ['candidat'],
+        
+    }
+}
 module.exports = {
-    candidateValidator
+    candidateValidator,
+    applicationValidator
 }

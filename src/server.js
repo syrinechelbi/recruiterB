@@ -25,6 +25,7 @@ app.use(express.json());
 
 app.use('/candidates', require('./routes/candidat'));  // Cadndidate route 
 app.use('/employer', require('./routes/employer')); //employer route
+app.use('/application', require('./routes/application')); //employer route
 
 //method for running the server
 

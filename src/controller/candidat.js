@@ -30,14 +30,11 @@ const createOneCandidat = async (req, res) => {
  
   const findAllCandidats = async (req, res) => {
     try {
-        let candidats = await findCandidates(req.body)
+        let candidats = await findCandidates({})
         res.status(200).send(candidats)
     } catch (error) {
         res.status(400).send({message: error.message})
     }
-}
-
-  const allProducts = (query = {}) => {
 }
 
   
