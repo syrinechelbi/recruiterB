@@ -32,7 +32,7 @@ const createOneOffre = async (req, res) => {
  
   const findAllOffres = async (req, res) => {
     try {
-        let offres = await findOffres(req.body)
+        let offres = await findOffres({})
         res.status(200).send(offres)
     } catch (error) {
         res.status(400).send({message: error.message})
