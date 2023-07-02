@@ -37,8 +37,24 @@ const EmployerValidator = {
 }
 }
 
+const offreValidator = {
+    body    :   {
+        type    :   'object',
+        required:   ['maxEmployees','minEmployees','description','contractType','employer','applications'],
+        properties  :   {
+            maxEmployees    :   { type: 'Number' },
+            minEmployees   :   { type: 'Number' },
+            description    :   { type: 'string' },
+            applications    :   [{ type: 'string' }]
+         
+    }
+}
+}
+
+
 module.exports = {
     candidateValidator,
     EmployerValidator,
-    applicationValidator
+    applicationValidator,
+    offreValidator
 }
