@@ -5,7 +5,7 @@ const offreSchema = new mongoose.Schema(
         minEmployees : {type : Number, default:null },
         maxEmployees : {type : Number, default:null },
         description : {type : String, default:null },
-        contactType : [{type : String , default: "FULLTIME", enum:["FULLTIME","PARTTIME","INTERNSHIP"]}] ,
+        contactType : {type : String , default: "FULLTIME", enum:["FULLTIME","PARTTIME","INTERNSHIP"]},
         
         employer : {type : Schema.Types.ObjectId,ref : "employers"},
         applications : [{type : Schema.Types.ObjectId,ref : "applications"}]
@@ -13,5 +13,56 @@ const offreSchema = new mongoose.Schema(
     },
     {timestamps:true}
 );
+
+const createOffre = (query) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const offre = await Offre.create(query);
+            resolve(offre)
+        } catch (error) {
+            reject({message: error.message})
+        }
+    })
+}
+
+const findOffres = (query = {}) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const offres = await Offre.find(query)
+                                        .sort({createdAt: -1})
+            resolve(offres)
+        } catch (error) {
+            reject({message: error.message})
+        }
+    })
+}
+
+const deleteOffre = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const offre = await Offre.findByIdAndDelete(id);
+            resolve(offre)
+        } catch (error) {
+            reject({message: error.message})
+        }
+    })
+}
+const updateOffre = (id, data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const offre = await Offre.findByIdAndUpdate(id, data, {new:true});
+            resolve(offre)
+        } catch (error) {
+            reject({message: error.message})
+        }
+    })
+}
+
+module.exports ={
+    createOffre,
+    findOffres,
+    deleteOffre,
+    updateOffre
+}
 
 const Offre = mongoose.model("offres",offreSchema);
