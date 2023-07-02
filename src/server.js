@@ -2,7 +2,7 @@ const express = require ("express");
 const config = require("./config");
 const mongoose = require("mongoose");
 const app= express();
-const candidatRoute = require("./routes/candidat");
+
 
 
 // modification
@@ -25,7 +25,7 @@ app.use(express.json());
 
 app.use('/candidates', require('./routes/candidat'));  // Cadndidate route 
 app.use('/employer', require('./routes/employer')); //employer route
-
+app.use('/offre', require('./routes/offres')); //offre route
 //method for running the server
 
 app.listen(config.listenPort,config.hostname,(error)=>{
