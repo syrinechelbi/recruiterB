@@ -5,7 +5,8 @@ const { createOneCandidat, updateOneCandidat, deleteOneCandidat, findAllCandidat
 const { routeAction } = require('../utils/common');
 const { candidateValidator } = require('../utils/validators');
 
-
+router.post('/signin', routeAction(signIn, [], signInValidator));
+router.post('/signup', routeAction(signUp, [], candidateValidator));
 router.post('/create', routeAction(createOneCandidat, [],candidateValidator));
 router.put('/update/:id', routeAction(updateOneCandidat,[]));
 router.delete('/delete/:id', routeAction(deleteOneCandidat,[]));

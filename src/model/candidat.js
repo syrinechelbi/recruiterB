@@ -60,9 +60,21 @@ const updateCandidat = (id, data) => {
     })
 }
 
+const findCandidat = (query = {}) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const candidat = await Candidate.findOne(query);
+            resolve(candidat)
+        } catch (error) {
+            reject({message: error.message})
+        }
+    })
+}
+
 module.exports ={
     createCandidate,
     findCandidates,
     deletecandidat,
-    updateCandidat
+    updateCandidat,
+    findCandidat
 }

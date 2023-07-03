@@ -30,7 +30,7 @@ const createEmployer = (query) => {
 const findEmployer = (query= {} ) => {
     return new Promise(async(resolve, reject) => {
         try {
-            const employer= await Employer.find(query);
+            const employer= await Employer.findOne(query);
             resolve(employer);
         } catch (error) {
             reject({message : error.message})
@@ -60,10 +60,11 @@ const deleteEmployer = (id) => {
     })
 }
 
-const findOneEmployer = (query = {}) => {
+const findemployers = (query = {})  => {
     return new Promise(async (resolve, reject) => {
         try {
-            const employer = await Employer.findOne(query);
+            const employer = await Employer.find(query)
+                                        .sort({createdAt: -1})
             resolve(employer)
         } catch (error) {
             reject({message: error.message})
@@ -71,10 +72,13 @@ const findOneEmployer = (query = {}) => {
     })
 }
 
+
+
 module.exports={
 createEmployer,
 findEmployer,
 updateEmployer,
 deleteEmployer,
-findOneEmployer
+findEmployer,
+findemployers
 }

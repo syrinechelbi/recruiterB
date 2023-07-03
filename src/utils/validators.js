@@ -50,11 +50,26 @@ const offreValidator = {
     }
  }
 }
-const signInValidator = {
+const signInValidatorE = {
     body : {
         type    :   'object',
         required:   ['email', 'password'],
         properties  :   {
+            email    :   { type: 'string' },
+            password    :   { type: 'string', minLength: 8 }
+        }
+    }
+}
+
+const signInValidatorC = {
+    body : {
+        type    :   'object',
+        required:   ['email', 'password'],
+        properties  :   {
+            firstName : { type: 'string' },
+            lastName : { type: 'string' },
+            phone : { type: 'string' },
+            gender : { type: 'string' },
             email    :   { type: 'string' },
             password    :   { type: 'string', minLength: 8 }
         }
@@ -67,5 +82,6 @@ module.exports = {
     employerValidator,
     applicationValidator,
     offreValidator,
-    signInValidator
+    signInValidatorE,
+    signInValidatorC
 }

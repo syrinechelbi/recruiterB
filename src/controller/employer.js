@@ -6,7 +6,7 @@ const {createEmployer,
     findEmployer,
     updateEmployer,
     deleteEmployer,
-    findOneEmployer}= require('../model/employer');
+    findemployers}= require('../model/employer');
     
 
     const createOneemployer = async (req,res) =>{
@@ -39,13 +39,21 @@ const {createEmployer,
 
     const findallemployers = async (req,res) =>{
         try {
-            let employer =await findEmployer({});
+            let employer =await findemployers({});
             res.status(200).send(employer);
         } catch (error) {
             res.status(400).send({message: error.message})
         }
     }
 
+    const findOneEmployer = async (req,res) =>{
+        try {
+            let employer =await findEmployer({});
+            res.status(200).send(employer);
+        } catch (error) {
+            res.status(400).send({message: error.message})
+        }
+    }
 //LOGIN
 const signIn = async (req, res) => {
     try {
@@ -117,6 +125,7 @@ module.exports={
     updateOneemployer,
     deleteOneemployer,
     findallemployers,
+    findOneEmployer,
     signIn,
     signUp
 }
