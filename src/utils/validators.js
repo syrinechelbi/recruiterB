@@ -40,11 +40,12 @@ const employerValidator = {
 const offreValidator = {
     body    :   {
         type    :   'object',
-        required:   ['maxEmployees','minEmployees','description','contractType','employer','applications'],
+        required:   ['jobtitle','ReqEmployees','description','contractType',requirments,'employer','applications'],
         properties  :   {
-            maxEmployees    :   { type: 'Number' },
-            minEmployees   :   { type: 'Number' },
+            jobTitle    :   { type: 'string' },
+           ReqEmployees   :   { type: 'Number' },
             description    :   { type: 'string' },
+            requirments    :   { type: 'string' },
             applications    :   [{ type: 'string' }]
          
     }
