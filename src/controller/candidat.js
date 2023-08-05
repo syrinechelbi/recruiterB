@@ -1,5 +1,8 @@
 const { createCandidate, findCandidates, deletecandidat, updateCandidat, findCandidat } = require("../model/candidat");
 var bcrypt=require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("../config");
+
 
 const createOneCandidat = async (req, res) => {
     try {
@@ -13,7 +16,6 @@ const createOneCandidat = async (req, res) => {
 
   const updateOneCandidat = async (req, res) => {
     try {
-      console.log(req.body)
       let candidat = await updateCandidat(req.params.id, req.body)
       res.status(201).send(candidat)
   } catch (error) {
@@ -88,15 +90,16 @@ const signUp = async (req,res) =>{
   try {
 
     const {firstName,lastName,phone,gender,email,password} = req.body;
-   
+    const encryptedPassword = await bcrypt.hash(password,10);
+
+    let body = {...req.body,password:encryptedPassword}
+    console.log(body);
     const oldUser = await findCandidat({email})
     console.log(oldUser);
     if (oldUser)
     {res.status(400).send({message: "User already exist"});}
 
-    const encryptedPassword = await bcrypt.hash(password,10);
-let body = {...req.body,password:encryptedPassword}
-console.log(body);
+
     const candidate = await createCandidate(body);
 console.log(candidate);
     const token = jwt.sign(
