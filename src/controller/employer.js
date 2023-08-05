@@ -10,8 +10,11 @@ const {createEmployer,
     
 
     const createOneemployer = async (req,res) =>{
+        
         try {
+            console.log(req.body)
             let employer = await createEmployer(req.body);
+            
             res.status(200).send(employer);
         
         } catch (error) {
@@ -63,7 +66,7 @@ const signIn = async (req, res) => {
           res.status(400).send({message: "All input are required"});
         }
 
-        const employer = await findOneEmployer({email})
+        const employer = await findEmployer({email})
        
         if (employer && (await bcrypt.compare(password, employer.password))) {
             
@@ -87,23 +90,25 @@ const signIn = async (req, res) => {
 // INSCRIPTION 
 const signUp = async (req, res) => {
     try {
-   
-        const { name, companyName, phone,email ,password } = req.body;
+   console.log(req.body)
+        const { firstName,lastName, companyName, phone,email ,password } = req.body;
 
-        if (!(email && password && name && companyName)) {
+        if (!(email && password && firstName && lastName && companyName)) {
             return res.status(400).send({message: "All input is required"});
         }
+        console.log('1')
 
-        const oldUser = await findOneEmployer({email});
+        const oldUser = await findEmployer({email:req.body.email});
+        console.log('2')
 
         if (oldUser) {
             return res.status(409).send({message:"User Already Exist. Please Login"});
         }
-
+        console.log('3')
         encryptedPassword = await bcrypt.hash(password, 10);
 
-        const employer = await createEmployer({name, companyName,phone, email, password: encryptedPassword})
-
+        const employer = await createEmployer({firstName,lastName, companyName,phone, email, password: encryptedPassword})
+        console.log('4')
         const token = jwt.sign(
             { user_id: employer._id, email },
             config.secretKey,

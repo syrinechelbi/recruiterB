@@ -1,5 +1,5 @@
 const { createCandidate, findCandidates, deletecandidat, updateCandidat, findCandidat } = require("../model/candidat");
-
+var bcrypt=require("bcryptjs");
 
 const createOneCandidat = async (req, res) => {
     try {
@@ -58,7 +58,7 @@ const signIn = async (req,res) => {
     else if (!(password))
     {res.status(400).send({message : "fill in the password"});}
 
-    const candidat = await findOneCandidate({email})
+    const candidat = await findCandidat({email})
     if (candidat && (await bcrypt.compare(password, candidat.password))) {
             
       const token = jwt.sign(
@@ -89,18 +89,16 @@ const signUp = async (req,res) =>{
 
     const {firstName,lastName,phone,gender,email,password} = req.body;
    
-    if (!(firstName & lastName & phone & gender & email & password))
-    {res.status(400).send({message: "All input is required"});}
-
-    const oldUser = await findOneCandidate({email})
-
+    const oldUser = await findCandidat({email})
+    console.log(oldUser);
     if (oldUser)
     {res.status(400).send({message: "User already exist"});}
 
     const encryptedPassword = await bcrypt.hash(password,10);
-
-    const candidate = await createCandidate(firstName , lastName , phone , gender , email , encryptedPassword);
-
+let body = {...req.body,password:encryptedPassword}
+console.log(body);
+    const candidate = await createCandidate(body);
+console.log(candidate);
     const token = jwt.sign(
       { user_id: candidate._id, email },
       config.secretKey,
@@ -109,7 +107,7 @@ const signUp = async (req,res) =>{
       }
   );
   candidate.token = token;
-
+  console.log("abcd",candidate);
   res.status(200).send(candidate);
 
 
@@ -128,6 +126,7 @@ const signUp = async (req,res) =>{
     deleteOneCandidat,
     findAllCandidats,
     findOneCandidate,
-    signIn
+    signIn,
+    signUp
   };
   

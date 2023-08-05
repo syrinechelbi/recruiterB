@@ -2,8 +2,10 @@ const express = require ("express");
 const config = require("./config");
 const mongoose = require("mongoose");
 const app= express();
+const cors = require('cors');
 
 
+app.use(cors()); 
 
 // modification
 mongoose.set('useFindAndModify', false);

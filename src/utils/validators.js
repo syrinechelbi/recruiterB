@@ -25,9 +25,10 @@ applicationValidator ={
 const employerValidator = {
     body    :   {
         type    :   'object',
-        required:   ['name','companyName','phone','email','password','gender'],
+        required:   ['firstName','lastName','companyName','phone','email','password'],
         properties  :   {
-            name    :   { type: 'string' },
+            firstName    :   { type: 'string' },
+            lastName    :   { type: 'string' },
             companyName   :   { type: 'string' },
             phone    :   { type: 'string' },
             email    :   { type: 'string' },
@@ -40,7 +41,7 @@ const employerValidator = {
 const offreValidator = {
     body    :   {
         type    :   'object',
-        required:   ['jobtitle','ReqEmployees','description','contractType',requirments,'employer','applications'],
+        required:   ['jobtitle','ReqEmployees','description','contractType','requirments','employer','applications'],
         properties  :   {
             jobTitle    :   { type: 'string' },
            ReqEmployees   :   { type: 'Number' },
@@ -67,10 +68,6 @@ const signInValidatorC = {
         type    :   'object',
         required:   ['email', 'password'],
         properties  :   {
-            firstName : { type: 'string' },
-            lastName : { type: 'string' },
-            phone : { type: 'string' },
-            gender : { type: 'string' },
             email    :   { type: 'string' },
             password    :   { type: 'string', minLength: 8 }
         }

@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const jwt = require('jsonwebtoken');
+const joi = require('joi');
+const passwordComplexity = require('joi-password-complexity');
+
+
 const candidatSchema = new mongoose.Schema(
     {
         firstName : {type : String, default:null },
@@ -71,10 +76,29 @@ const findCandidat = (query = {}) => {
     })
 }
 
+candidatSchema.methods.generateAuthToken = function() {
+    const token= jwt.sign({_id:this._id},process.env.JWTPRIVATEKEY, {expiresIn : "7d"});
+    return token;
+}
+
+const validate =(data) => {
+    const Schema= joi.object({
+       firstName: joi.string().required().label("firstName"),
+       lastName: joi.string().required().label("lastName"),
+       phone: joi.string().required().label("phone"),
+       email: joi.string().required().label("email"),
+       password: passwordComplexity.required().label("password"),
+       gender: joi.string().required().label("gender")
+
+    });
+    return Schema.validate(data);
+}
+
 module.exports ={
     createCandidate,
     findCandidates,
     deletecandidat,
     updateCandidat,
-    findCandidat
+    findCandidat,
+    validate
 }

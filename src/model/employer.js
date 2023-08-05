@@ -3,13 +3,14 @@ const mongoose = require("mongoose");
 
 const employerSchema = new mongoose.Schema(
     {
-        name : {type : String , default : null},
+        firstName : {type : String , default : null},
+        lastName : {type : String , default : null},
         companyName : {type : String , default : null},
         phone : {type : String , default : null},
         email : {type : String , default : null},
         password : {type : String , default : null},
         token: { type: String },
-
+ 
     },
     {timestamps : true}
 );

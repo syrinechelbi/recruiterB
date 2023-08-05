@@ -4,7 +4,7 @@ const router = express.Router();
 const { createOneCandidat, updateOneCandidat, deleteOneCandidat, findAllCandidats } = require('../controller/candidat');
 const { routeAction } = require('../utils/common');
 const { candidateValidator, signInValidatorC } = require('../utils/validators');
-const { signIn, signUp } = require('../controller/employer');
+const { signIn, signUp } = require('../controller/candidat');
 
 router.post('/signin', routeAction(signIn, [], signInValidatorC));
 router.post('/signup', routeAction(signUp, [], candidateValidator));
