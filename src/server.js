@@ -29,6 +29,7 @@ app.use('/candidates', require('./routes/candidat'));  // Cadndidate route
 app.use('/employer', require('./routes/employer')); //employer route
 app.use('/application', require('./routes/application')); //application route
 app.use('/offre', require('./routes/offres')); //offre route
+app.use('/profile', require('./routes/profile')); //profile route
 //method for running the server
 
 app.listen(config.listenPort,config.hostname,(error)=>{

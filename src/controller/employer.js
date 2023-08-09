@@ -82,7 +82,7 @@ const signIn = async (req, res) => {
     
             res.status(200).send(employer);
         }
-        res.status(400).send({message: "Invalid Credentials"});
+else {        res.status(400).send({message: "Invalid Credentials"});}
     } catch (err) {
         res.status(400).send({message: err.message})
     }
@@ -124,6 +124,31 @@ const signUp = async (req, res) => {
     }
 }
 
+//check email 
+const checkEmail = async (req,res) =>{
+
+    try {
+  
+      const {email} = req.body;
+  
+      let body = {...req.body}
+      console.log(body);
+      const oldUser = await findEmployer({email})
+      console.log(oldUser);
+      if (!oldUser)
+      {res.status(400).send({message: "User not exist"});}
+      
+      console.log("abcd",oldUser);
+      res.status(200).send(oldUser);
+
+    }
+   catch (error) {
+    res.status(400).send({message : error.message})
+  }
+  
+  }
+  
+
 
 module.exports={
     createOneemployer,
@@ -132,5 +157,6 @@ module.exports={
     findallemployers,
     findOneEmployer,
     signIn,
-    signUp
+    signUp,
+    checkEmail
 }

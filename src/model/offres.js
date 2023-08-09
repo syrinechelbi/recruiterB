@@ -7,6 +7,8 @@ const offreSchema = new mongoose.Schema(
         description : {type : String, default:null },
         contactType : {type : String , default: "FULLTIME", enum:["FULLTIME","PARTTIME","INTERNSHIP"]},
         requirments : {type : String, default:null },
+        deadline : {type : Date, default:null },
+        addInfo : {type : String, default:null },
         employer : {type : Schema.Types.ObjectId,ref : "employers"},
         applications : [{type : Schema.Types.ObjectId,ref : "applications"}]
 

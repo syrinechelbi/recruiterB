@@ -120,6 +120,29 @@ console.log(candidate);
 
 }
 
+//check email 
+const checkEmail = async (req,res) =>{
+
+  try {
+
+    const {email} = req.body;
+
+    let body = {...req.body}
+    console.log(body);
+    const oldUser = await findCandidat({email})
+    console.log(oldUser);
+    if (!oldUser)
+    {res.status(400).send({message: "User not exist"});}
+    
+    console.log("abcd",oldUser);
+    res.status(200).send(oldUser);
+  } 
+ catch (error) {
+  res.status(400).send({message : error.message})
+}
+
+}
+
 
 
   
@@ -130,6 +153,7 @@ console.log(candidate);
     findAllCandidats,
     findOneCandidate,
     signIn,
-    signUp
+    signUp,
+    checkEmail
   };
   
